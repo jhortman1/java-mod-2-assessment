@@ -34,7 +34,6 @@ public class HoapitalWorld {
         String firstName;
         String lastName;
         int symptomsInt = 0;
-        //Symtoms symp;
         Patient p;
 
         for(int i = 0; i < 5; i++)
