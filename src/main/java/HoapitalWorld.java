@@ -8,9 +8,9 @@ public class HoapitalWorld {
 
         //Welcome to hospital world
         System.out.println("Welcome to Hospital world....");
-        System.out.println("Enter the name of your hospital: ");
+        hospitalName = hasInput(scanner, "Enter the name of your hospital: ");
+        //System.out.println("Enter the name of your hospital: ");
         //get the name of the hospital
-        hospitalName = scanner.nextLine();
         Hospital newHospitalWorld = new Hospital(hospitalName);
         //get names of doctors the specality for 3 doctor
         //provide list of specilities the user can choose from
@@ -18,7 +18,7 @@ public class HoapitalWorld {
         addPatients(scanner, newHospitalWorld.getListOfDoctors());
         //user to create 5 paitients and add them to the doctors list of patients
 
-        System.out.println("Printingn Hospital World:");
+        System.out.println("Printing Hospital World:");
 
         newHospitalWorld.getHospitalName();
         for (Doctor doc : newHospitalWorld.getListOfDoctors() ) {
@@ -41,14 +41,13 @@ public class HoapitalWorld {
             System.out.println("Follow prompts to enter 5 Patients's Names and area where symtoms exist from list below:");
             System.out.println("----------------------------");
             System.out.println("Patient #: "+(i+1));
-            System.out.println("Enter First Name: ");
-            firstName = scanner.nextLine();
-            System.out.println("Enter Last Name: ");
-            lastName = scanner.nextLine();
+            firstName = hasInput(scanner, "Enter First Name: ");
+            lastName = hasInput(scanner, "Enter Last Name: ");
             System.out.println("Enter Symptom (1) Skin Issues (2) Brain Issues (3) Eyes Issues (4) Disease related symptoms (5) Kid related symptoms (6) General for misc");
             System.out.println("----------------------------");
             
             do{
+                symptomsInt = 0;
                 try{
                     symptomsInt = Integer.parseInt(scanner.nextLine());
                 }catch(Exception e)
@@ -99,14 +98,13 @@ public class HoapitalWorld {
             System.out.println("Follow prompts to enter 3 Doctor's Name and Specality from list below:");
             System.out.println("----------------------------");
             System.out.println("Doctor #: "+(i+1));
-            System.out.println("Enter First Name: ");
-            firstName = scanner.nextLine();
-            System.out.println("Enter Last Name: ");
-            lastName = scanner.nextLine();
+            firstName = hasInput(scanner, "Enter First Name: ");
+            lastName = hasInput(scanner, "Enter Last Name: ");
             System.out.println("Enter (1) Dermatology (2) Neurology (3) Ophthalmology (4) Pathology (5) Pediatrics (6) General");
             System.out.println("----------------------------");
             do{
                 try{
+                    specalityInt = 0;
                     specalityInt = Integer.parseInt(scanner.nextLine());
                 }catch(Exception e)
                 {
@@ -198,10 +196,22 @@ public class HoapitalWorld {
                 {
                     doctor.addPatient(p);
                 }
-                System.out.println("Sorry We do not have a doctor to tret you.");
-                p.getName();
-                System.out.println("Will have to go to another hospital. Sorry.");
             }
         }
+    }
+    public static void noDoctorToTreatYourIllness(Patient p)
+    {
+        System.out.println("Sorry We do not have a doctor to tret you.");
+        p.getName();
+        System.out.println("Will have to go to another hospital. Sorry.");
+    }
+    public static String hasInput(Scanner scanner, String request)
+    {
+        String check;   
+        do{
+            System.out.println(request);
+            check = scanner.nextLine();
+        }while(check.isEmpty());
+        return check;
     }
 }
